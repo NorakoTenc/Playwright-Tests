@@ -2,14 +2,12 @@
 
 ## Repository Summary
 
-This repository contains a simple End-to-End (E2E) testing framework built with **Playwright** and structured using the **Page Object Model (POM)** design pattern. The project's primary goal is to demonstrate a robust, maintainable, and scalable test architecture, with a specific focus on verifying link navigation.
+This repository hosts an End-to-End (E2E) testing framework built using Playwright with a strong emphasis on architectural best practices.
 
-The core test case validates external navigation:
-* **Action:** Navigating from the Redmine Guide page (`https://www.redmine.org/guide`) and clicking the "Classes and methods of Redmine source code" link.
-* **Assertion:** Verifying that the application successfully navigates to the external RubyDoc page (`https://www.rubydoc.info/github/redmine/redmine/index`) in the same tab.
-
-The project is fully integrated with **GitHub Actions** for Continuous Integration (CI) and generates comprehensive, persistent **Allure Reports** which are automatically published to GitHub Pages.
-
+**Key Architectural Highlights:**
+* **Page Object Model (POM)**: All tests strictly adhere to the POM pattern, separating test logic from element locators and actions for superior maintainability.
+* **Best Practices**: Includes examples of handling complex web interactions like external navigation (in the same tab) and managing file downloads through network mocking.
+* **CI/CD Automation**: Features a robust GitHub Actions pipeline for continuous integration.
 ---
 
 ## Requirements
@@ -25,7 +23,7 @@ Before you can install and run the tests, ensure you have the following installe
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/NorakoTenc/Playwright-Tests.git](https://github.com/NorakoTenc/Playwright-Tests.git)
+    git clone https://github.com/NorakoTenc/Playwright-Tests.git 
     cd Playwright-Tests
     ```
 
@@ -37,7 +35,7 @@ Before you can install and run the tests, ensure you have the following installe
 
 3.  **Install Playwright browsers:**
     ```bash
-    npx playwright install
+    npm playwright install
     ```
 
 ---
@@ -48,11 +46,27 @@ Tests can be launched either locally using the command line or automatically via
 
 ### Local Launch
 
-To run all tests in the project (defaulting to Chromium, Firefox, and WebKit as defined in `playwright.config.ts`):
+To run all tests in the project:
 
 ```bash
 # Set the base URL environment variable (as defined in the config)
-export BASE_URL=[https://www.redmine.org/](https://www.redmine.org/)
+export BASE_URL=https://www.redmine.org/
 
 # Run the tests
-npx playwright test
+npm playwright test
+```
+To watch the tests run in a visible browser window, use the `--headed` flag:
+```
+npm playwright test --headed
+```
+---
+## Steps to Creating the Report
+After the test execution is complete, you can view a detailed HTML report.
+
+1. The report is generated automatically after each run and stored in the `playwright-report` folder.
+
+2. To view the last test run report, execute the following command:
+```
+npx playwright show-report
+```
+This will open the report in your default web browser, where you can inspect each test, its steps, and results.
