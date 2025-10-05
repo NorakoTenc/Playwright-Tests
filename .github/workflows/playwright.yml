@@ -1,27 +1,60 @@
 name: Playwright Tests
 on:
   push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
+    branches: [ main ]
+  workflow_dispatch:
 jobs:
-  test:
-    timeout-minutes: 60
+  test_and_report:
     runs-on: ubuntu-latest
+    env:
+      BASE_URL: https://www.redmine.org/
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-      with:
-        node-version: lts/*
-    - name: Install dependencies
-      run: npm ci
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
-    - name: Run Playwright tests
-      run: npx playwright test
-    - uses: actions/upload-artifact@v4
-      if: ${{ !cancelled() }}
-      with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Playwright tests
+        run: npx playwright test
+        env:
+          ALLURE_RESULTS_DIR: allure-results
+          
+      - name: Download previous Allure history
+        uses: actions/cache/restore@v4
+        id: cache-history
+        with:
+          path: allure-history
+          key: ${{ runner.os }}-allure-history-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-allure-history-
+
+      - name: Copy Allure history to results folder
+        run: cp -a allure-history/. allure-results/history || true
+        
+      - name: Generate Allure Report
+        uses: simple-elf/allure-report-action@v1.7
+        with:
+          allure_results: allure-results
+          allure_report_path: allure-report
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          allure_title: My Redmine Report
+          
+      - name: Save Allure history for future runs
+        uses: actions/cache/save@v4
+        with:
+          path: allure-history
+          key: ${{ runner.os }}-allure-history-${{ github.sha }}
+
+      - name: Deploy Allure Report to GitHub Pages branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: allure-report 
+          publish_branch: gh-pages-allure
+          keep_files: true 
+          commit_message: Deploy Allure Report for ${{ github.sha }}
