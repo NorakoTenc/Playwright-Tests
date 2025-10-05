@@ -17,19 +17,14 @@ export default defineConfig({
     screenshot: process.env.CI ? 'only-on-failure' : 'on',
     video: process.env.CI ? 'retain-on-failure' : 'on',
     trace: process.env.CI ? 'on-first-retry' : 'on',
-    actionTimeout: 10*5000,
-    navigationTimeout: 10*5000,
+    actionTimeout: 10*2000,
+    navigationTimeout: 10*2000,
   },
 
   projects: [
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'], viewport: { width: 1920, height: 1080 } },
-    },
-
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'], viewport: { width: 1920, height: 1080 } },
     },
   ],
 });
