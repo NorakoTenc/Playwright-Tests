@@ -1,0 +1,6 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Sun Oct 05 13:03:40 GMT 2025","Sun Oct 05 13:03:46 GMT 2025","5949","chromium","tc02_register_validation.spec.ts","","","","Register form validation",""
+"passed","Sun Oct 05 13:03:49 GMT 2025","Sun Oct 05 13:03:51 GMT 2025","2672","chromium","tc05_navigation.spec.ts","External Link Navigation","","","should navigate to RubyDoc page in the same tab",""
+"passed","Sun Oct 05 13:03:46 GMT 2025","Sun Oct 05 13:03:49 GMT 2025","2535","chromium","tc03_download.spec.ts","","","","Download page provides a downloadable file (mocked)",""
+"passed","Sun Oct 05 13:03:46 GMT 2025","Sun Oct 05 13:03:50 GMT 2025","4185","chromium","tc04_search.spec.ts","","","","Global search returns expected content",""
+"passed","Sun Oct 05 13:03:40 GMT 2025","Sun Oct 05 13:03:46 GMT 2025","6084","chromium","tc01_login_validation.spec.ts","","","","Login validation shows errors for empty and invalid inputs",""
