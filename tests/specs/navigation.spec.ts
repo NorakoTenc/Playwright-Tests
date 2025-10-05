@@ -1,4 +1,3 @@
-// tests/navigation.spec.ts
 import { test, expect, Page } from '@playwright/test';
 import { RedmineGuidePage } from '../pages/guidePage'; 
 import { RubyDocPage } from '../pages/rubyDocPage'; 

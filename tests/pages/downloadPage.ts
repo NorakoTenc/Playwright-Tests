@@ -8,19 +8,15 @@ export class DownloadPage {
     this.page = page;
     this.downloadLinks = page.locator('#content .wiki a[href$=".zip"], #content .wiki a[href$=".tar.gz"]');
   }
-
   async open() {
     await this.page.goto('/projects/redmine/wiki/Download');
   }
-
   async downloadFirst(): Promise<Download | null> {
     const count = await this.downloadLinks.count();
     if (count === 0) {
       return null;
     }
     const firstLink = this.downloadLinks.first();
-
-    // The rest of your logic is correct!
     const [download] = await Promise.all([
       this.page.waitForEvent('download'), 
       firstLink.click()                  
