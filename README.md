@@ -49,7 +49,7 @@ Tests can be launched either locally using the command line or automatically via
 To run all tests in the project:
 
 ```bash
-# Set the base URL environment variable (as defined in the config)
+# Set the base URL environment variable
 export BASE_URL=https://www.redmine.org/
 
 # Run the tests
