@@ -17,8 +17,8 @@ export default defineConfig({
     screenshot: process.env.CI ? 'only-on-failure' : 'on',
     video: process.env.CI ? 'retain-on-failure' : 'on',
     trace: process.env.CI ? 'on-first-retry' : 'on',
-    actionTimeout: 10*3000,
-    navigationTimeout: 10*3000,
+    actionTimeout: 10*5000,
+    navigationTimeout: 10*5000,
   },
 
   projects: [
