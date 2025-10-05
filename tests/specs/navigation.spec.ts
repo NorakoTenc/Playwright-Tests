@@ -5,7 +5,7 @@ import { RubyDocPage } from '../pages/rubyDocPage';
 
 test.describe('External Link Navigation', () => {
 
-  test('should navigate to RubyDoc page in the same tab', async ({ page }) => {
+  test('Should navigate to RubyDoc page in the same tab', async ({ page }) => {
     
     const redmineGuidePage = new RedmineGuidePage(page);
     let rubyDocPage: RubyDocPage;
